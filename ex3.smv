@@ -1,0 +1,27 @@
+MODULE 
+	main
+IVAR
+	button: boolean;
+VAR
+	timer: 0..5;
+	estado: {s0, s1, s2};
+ASSIGN
+	init(timer) := 5;
+	init(estado):= s0;
+	next(estado) := case
+		estado = s0 & button : {s1, s2};
+        estado = s1 & !timeout : {s1, s2};
+		estado = s1 & timeout : {s0, s2};
+		TRUE : estado;
+	esac;
+	next(timer) := case
+		estado = s1 & timer > 0 : timer - 1;
+		TRUE : 5;
+	esac;
+DEFINE
+	lampada := estado = s1;
+    queimada := estado = s2;
+	timeout := timer = 0;
+
+LTLSPEC G (button -> F lampada)
+LTLSPEC F (lampada & G (!button) -> F G X (!lampada))
