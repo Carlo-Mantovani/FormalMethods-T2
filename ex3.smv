@@ -23,5 +23,13 @@ DEFINE
     queimada := estado = s2;
 	timeout := timer = 0;
 
-LTLSPEC G (button -> F lampada)
-LTLSPEC F (lampada & G (!button) -> F G X (!lampada))
+LTLSPEC F lampada
+LTLSPEC F G queimada
+LTLSPEC X estado = s0 -> !queimada
+LTLSPEC F (queimada -> lampada)
+
+
+--Uma lâmpada pode estar ligada no futuro. 
+--Uma lâmpada eventualmente pode permanecer sempre queimada. 
+--Uma lâmpada não pode passar de desligada para queimada. 
+--Uma lâmpada pode voltar a estar ligada depois de queimada. 

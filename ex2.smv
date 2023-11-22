@@ -23,3 +23,8 @@ DEFINE
 
 LTLSPEC G (button -> F lampada)
 LTLSPEC F (lampada & G (!button) -> F G X (!lampada))
+
+
+-- A lâmpada sempre irá ligar se o botão for pressionado.
+-- Uma vez que a lâmpada esteja ligada, se não for pressionado o botão, ela não voltará a estar
+ligada
