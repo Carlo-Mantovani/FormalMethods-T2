@@ -23,10 +23,12 @@ DEFINE
     queimada := estado = s2;
 	timeout := timer = 0;
 
-LTLSPEC F lampada
-LTLSPEC F G queimada
-LTLSPEC X estado = s0 -> !queimada
-LTLSPEC F (queimada -> lampada)
+
+CTLSPEC EF lampada 
+CTLSPEC EF EG queimada
+CTLSPEC !EF (EX !lampada -> queimada)
+CTLSPEC EF (queimada -> EF lampada)
+
 
 
 --Uma lâmpada pode estar ligada no futuro. 
