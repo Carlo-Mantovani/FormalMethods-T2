@@ -10,7 +10,7 @@ ASSIGN
 	init(estado):= s0;
 	next(estado) := case
 		estado = s0 & button : {s1, s2};
-        	estado = s1 & !timeout : {s1, s2};
+        estado = s1 & !timeout : {s1, s2};
 		estado = s1 & timeout : {s0, s2};
 		TRUE : estado;
 	esac;
