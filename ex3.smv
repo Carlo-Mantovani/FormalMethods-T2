@@ -24,13 +24,24 @@ DEFINE
 	timeout := timer = 0;
 
 
+
+
+
 CTLSPEC EF lampada 
-CTLSPEC EF AG queimada
-CTLSPEC !EF (EX !lampada -> queimada)
-CTLSPEC AG (queimada -> EF lampada)
+CTLSPEC EF EG queimada
+CTLSPEC !EF (!lampada -> EX queimada)
+
+CTLSPEC EF (queimada & EF lampada)
+--JUSTICE lampada
 
 
 
+--CTLSPEC !E[queimada U (queimada & !(queimada & EF (lampada)))]
+--A[x W y] = !E[!y U (!x & !y)]
+--!E[queimada U (queimada & !(queimada & EF (lampada))]
+--	A[!Q W (Q & AF(P))]
+
+--A[!Q W (Q & AF(P))]
 --Uma lâmpada pode estar ligada no futuro. 
 --Uma lâmpada eventualmente pode permanecer sempre queimada. 
 --Uma lâmpada não pode passar de desligada para queimada. 
