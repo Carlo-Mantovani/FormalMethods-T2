@@ -16,3 +16,13 @@ pick_state -v
 simulate -v 
 ```
 
+# Test Formulas
+
+```
+./nuXmv ex2.smv
+```
+
+```
+./nuXmv ex3.smv
+```
+

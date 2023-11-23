@@ -12,7 +12,6 @@ ASSIGN
 		estado = s0 & button : {s1, s2};
         	estado = s1 & !timeout : {s1, s2};
 		estado = s1 & timeout : {s0, s2};
-		estado = s2 : s2;
 		TRUE : estado;
 	esac;
 	next(timer) := case
@@ -21,14 +20,14 @@ ASSIGN
 	esac;
 DEFINE
 	lampada := estado = s1;
-    	queimada := estado = s2;
+    queimada := estado = s2;
 	timeout := timer = 0;
 
 
 CTLSPEC EF lampada 
 CTLSPEC EF AG queimada
 CTLSPEC !EF (EX !lampada -> queimada)
-CTLSPEC EF (queimada -> EF lampada)
+CTLSPEC AG (queimada -> EF lampada)
 
 
 
