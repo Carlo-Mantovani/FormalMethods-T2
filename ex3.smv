@@ -7,7 +7,7 @@ VAR
 	estado: {s0, s1, s2};
 ASSIGN
 	init(timer) := 5;
-	init(estado):= s0;
+	init(estado):= s1;
 	next(estado) := case
 		estado = s0 & button : {s1, s2};
         estado = s1 & !timeout : {s1, s2};
@@ -26,16 +26,16 @@ DEFINE
 
 
 
-JUSTICE queimada 
-CTLSPEC EF lampada 
-CTLSPEC EF EG queimada
-CTLSPEC !EF (!lampada -> EX queimada)
-CTLSPEC EF (queimada & EF lampada)
 
 --Uma lâmpada pode estar ligada no futuro. 
+CTLSPEC EF lampada 
 --Uma lâmpada eventualmente pode permanecer sempre queimada. 
+CTLSPEC EF EG queimada
 --Uma lâmpada não pode passar de desligada para queimada. 
+CTLSPEC !EF (!lampada -> EX queimada)
 --Uma lâmpada pode voltar a estar ligada depois de queimada. 
+CTLSPEC EF (queimada & EF lampada)
+
 
 --CTLSPEC E[!queimada U (queimada & EF lampada)]
 
