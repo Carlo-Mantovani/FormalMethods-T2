@@ -29,21 +29,14 @@ DEFINE
 
 --Uma lâmpada pode estar ligada no futuro. 
 CTLSPEC EF lampada 
+
 --Uma lâmpada eventualmente pode permanecer sempre queimada. 
-CTLSPEC EF EG queimada
+CTLSPEC EF AG queimada
+
 --Uma lâmpada não pode passar de desligada para queimada. 
 CTLSPEC !EF (!lampada -> EX queimada)
+
 --Uma lâmpada pode voltar a estar ligada depois de queimada. 
-CTLSPEC EF (queimada & EF lampada)
+CTLSPEC AG (queimada -> AX EF lampada)
 
 
---CTLSPEC E[!queimada U (queimada & EF lampada)]
-
-
-
---CTLSPEC !E[queimada U (queimada & !(queimada & EF (lampada)))]
---A[x W y] = !E[!y U (!x & !y)]
---!E[queimada W (queimada W !(queimada & EF (lampada)))]
---	A[!Q W (Q & AF(P))]
-
---A[!Q W (Q & AF(P))]
