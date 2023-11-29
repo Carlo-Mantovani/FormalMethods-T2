@@ -4,23 +4,24 @@ IVAR
 	button: boolean;
 VAR
 	timer: 0..5;
-	estado: {s0, s1, s2};
+	state: {s0, s1, s2};
 ASSIGN
 	init(timer) := 5;
-	init(estado):= s0;
-	next(estado) := case
-		estado = s0 & button : {s1, s2};
-        estado = s1 & !timeout : {s1, s2};
-		estado = s1 & timeout : {s0, s2};
-		TRUE : estado;
+	init(state):= s0;
+	next(state) := case
+		state = s0 & button : {s1, s2};
+        state = s1 & !timeout : {s1, s2};
+		state = s1 & timeout : {s0, s2};
+		TRUE : state;
 	esac;
 	next(timer) := case
-		estado = s1 & timer > 0 : timer - 1;
+		state = s1 & timer > 0 : timer - 1;
 		TRUE : 5;
 	esac;
 DEFINE
-	lampada := estado = s1;
-    queimada := estado = s2;
+	lamp_off := state = s0;
+	lamp_on := state = s1;
+    lamp_burnt := state = s2;
 	timeout := timer = 0;
 
 
@@ -28,15 +29,15 @@ DEFINE
 
 
 --Uma lâmpada pode estar ligada no futuro. 
-CTLSPEC EF lampada 
+CTLSPEC EF lamp_on 
 
 --Uma lâmpada eventualmente pode permanecer sempre queimada. 
-CTLSPEC EF AG queimada
+CTLSPEC EF AG lamp_burnt
 
 --Uma lâmpada não pode passar de desligada para queimada. 
-CTLSPEC !EF (!lampada -> EX queimada)
+CTLSPEC !EF (lamp_off -> EX lamp_burnt)
 
 --Uma lâmpada pode voltar a estar ligada depois de queimada. 
-CTLSPEC AG (queimada -> AX EF lampada)
+CTLSPEC AG (lamp_burnt -> AX EF lamp_on)
 
 
