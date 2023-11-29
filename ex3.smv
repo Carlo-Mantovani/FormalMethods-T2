@@ -25,9 +25,6 @@ DEFINE
 	timeout := timer = 0;
 
 
-
-
-
 --Uma lâmpada pode estar ligada no futuro. 
 CTLSPEC EF lamp_on 
 

@@ -21,6 +21,7 @@ DEFINE
 	lamp_on := state = s1;
 	timeout := timer = 0;
 
+
 -- A lâmpada sempre irá ligar se o botão for pressionado.
 LTLSPEC G (button -> F lamp_on)
 
