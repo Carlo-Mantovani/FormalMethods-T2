@@ -1,5 +1,8 @@
 # FormalMethods-T2
 
+# Names
+Bernardo Barzotto Zomer, Carlo Smaniotto Mantovani e Lucas Marchesan Cunha
+
 # Run
 In root 
 ```
